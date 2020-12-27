@@ -1,0 +1,7 @@
+instance/
+venv/
+migrations/alembic.ini
+error.log
+thunderr-data.sql
+.idea/
+__pycache__/

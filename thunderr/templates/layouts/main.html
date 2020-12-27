@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+
+    <link rel="stylesheet" href="/static/fonts/ionicons.min.css">
+
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+    <link rel="stylesheet" href="/static/css/Simple-Slider.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/Highlight-Clean.css">
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-light navbar-expand-md">
+            <div class="container-fluid" id="bar"><a class="navbar-brand" href="{{ url_for('index') }}"><img src="/static/img/thunder.png"><strong>Thunderr</strong></a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link {% if request.endpoint == 'shows' %} active {% endif %}" href="{{ url_for('shows') }}">Shows</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.endpoint == 'venues' %} active {% endif %}" href="{{ url_for('venues') }}">Venues</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.endpoint == 'artists' %} active {% endif %}" href="{{ url_for('artists') }}">Artists</a></li>
+                        <li class="nav-item"><a class="nav-link {% if request.endpoint == 'login' %} active {% endif %}" href="#">Login<i id = "login" class="fas fa-user-tie"></i> </a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Begin page content -->
+    <div id="content">
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-block alert-info fade in">
+                <a class="close" id="close" data-dismiss="alert">&times;</a>
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% if request.endpoint == 'show_artist' %}
+        <h6 style="text-align: right; font-size: 14px;">
+          <a style="text-decoration: none; color: #212529;" href="{{ url_for('edit_artist', artist_id=request.url.split('/')[-1]) }}">Edit  <i class="far fa-edit"></i></a>
+        </h6>
+        {% endif %}
+        {% if request.endpoint == 'show_venue' %}
+        <h6 style="text-align: right; font-size: 14px;">
+          <a style="text-decoration: none; color: #212529;" href="{{ url_for('edit_venue', venue_id=request.url.split('/')[-1]) }}">Edit  <i class="fas fa-edit"></i> </a>
+        </h6>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+
+    </div>
+    <div class="footer">
+        <footer>
+            <div class="social">
+                <a href="#"><i class="icon ion-social-github"></i></a>
+                <a href="#"><i class="icon ion-social-twitter"></i></a>
+                <a href="#"><i class="icon ion-social-instagram"></i></a>
+                <a href="#"><i class="icon ion-social-facebook"></i></a>
+            </div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Thunderr © 2021</p>
+        </footer>
+    </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+    <script src="/static/js/Simple-Slider.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+</body>
+
+</html>

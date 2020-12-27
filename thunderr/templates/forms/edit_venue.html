@@ -1,0 +1,43 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Edit Venue{% endblock %}
+{% block content %}
+  <div class="form-wrapper">
+    <form class="form" method="post" action="/venues/{{venue.id}}/edit">
+      <h3 class="form-heading">Edit venue <em>{{ venue.name }}</em> </h3>
+      <h5 style="text-align: right;"><a href="{{ url_for('delete_venue', venue_id=venue.id) }}" title="Delete Venue"><i class="fas fa-trash-alt"></i></a></h5>
+      <div class="form-group">
+        <label for="name">Name</label>
+        {{ form.name(class_ = 'form-control', value=venue.name, autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label>City & State</label>
+          <div class="form-inline">
+            <div class="form-group">
+              {{ form.city(class_ = 'form-control', value=venue.city, autofocus = true) }}
+            </div>
+            <div class="form-group">
+              {% set z = form.state.process_data(venue.state) %}
+              {{ form.state(class_ = 'form-control', autofocus = true) }}
+            </div>
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        {{ form.address(class_ = 'form-control', value=venue.address, autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label for="phone">Phone</label>
+          {{ form.phone(class_ = 'form-control', value=venue.phone, autofocus = true) }}
+        </div>
+      <div class="form-group">
+          <label for="image_link">Image Link</label>
+          {{ form.image_link(class_ = 'form-control', value=venue.image_link, autofocus = true) }}
+      </div>
+      <div class="form-group">
+          <label for="facebook_link">Facebook Link</label>
+          {{ form.facebook_link(class_ = 'form-control', value=venue.facebook_link, autofocus = true) }}
+      </div>
+      <input type="submit" value="Edit Venue" class="btn btn-primary btn-lg btn-block form-button">
+    </form>
+  </div>
+{% endblock %}

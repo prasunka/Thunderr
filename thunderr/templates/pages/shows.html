@@ -1,0 +1,22 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Shows{% endblock %}
+{% block content %}
+
+<div class="row">
+    {%for show in shows %}
+    <div class="col-sm-6" style="min-width: 500px;">
+      <div class="card" id="tile">
+        <img src="{{ show.artist_image_link }}" alt="Artist Image" />
+        <div class="card-body">
+
+          <h5 class="card-title">{{ show.start_time|datetime('medium') }}</h5>
+          <h6><a href="/artists/{{ show.artist_id }}">{{ show.artist_name }}</a></h6>
+          <p class="card-text">playing at</p>
+          <h6><a href="/venues/{{ show.venue_id }}">{{ show.venue_name }}</a></h6>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

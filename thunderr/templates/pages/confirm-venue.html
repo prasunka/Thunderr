@@ -1,0 +1,37 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Confirm{% endblock %}
+{% block content %}
+<div class="highlight-clean">
+    <div class="container">
+        <div class="intro">
+            <h2 class="text-center">Are you sure?</h2>
+            <p class="text-center">This action is irreversible!<br>Click <strong>Delete</strong> to confirm or <strong>Cancel</strong> to go back</p>
+        </div>
+        <div class="buttons">
+            <a class="btn btn-primary" id="delete" role="button" href="#" style="background: #fd5a5a; color:#fff;">Delete</a>
+            <a class="btn btn-light" role="button" href="/" style="color: #212529;">Cancel</a></div>
+    </div>
+</div>
+<script>
+    button = document.querySelector('#delete')
+
+    function onDelete(e){
+        fetch('/venues/{{ id }}', {
+            method: 'DELETE'
+        })
+        .then(function(response) {
+            console.log(response)
+            if(response.status == 204){
+                window.location = '/'
+            }
+            return response.json()
+
+        })
+        .then(function(json_response){
+            window.location = json_response['redirect_url']
+        })
+
+    }
+    button.onclick=onDelete;
+</script>
+{% endblock %}
